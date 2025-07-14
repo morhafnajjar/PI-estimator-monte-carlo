@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monte Carlo π Estimation Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="header__title">Monte Carlo π Estimation Simulator</h1>
+            <p class="header__description">Interactive demonstration of Monte Carlo method for estimating π using random point generation</p>
+            <div class="header__authors">
+                <span class="header__label">Authors:</span>
+                <span>Hasan Hijazi, Morhaf Najjar</span>
+                <span class="header__course">Concurrent Programming</span>
+            </div>
+        </header>
+
+        <main class="main">
+            <div class="controls">
+                <div class="controls__section">
+                    <h3 class="controls__title">Simulation Mode</h3>
+                    <div class="radio-group">
+                        <label class="radio-option">
+                            <input type="radio" name="mode" value="sequential" checked>
+                            <span class="radio-label">Sequential</span>
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="mode" value="parallel">
+                            <span class="radio-label">Parallel</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="controls__section">
+                    <label class="form-label" for="pointsInput">Number of Points</label>
+                    <input type="number" id="pointsInput" class="form-control" value="1000000" min="1000" max="10000000" step="1000">
+                </div>
+
+                <div class="controls__actions">
+                    <button id="runBtn" class="btn btn--primary btn--lg">Run Simulation</button>
+                    <button id="resetBtn" class="btn btn--secondary btn--lg">Reset</button>
+                </div>
+            </div>
+
+            <div class="visualization">
+                <div class="canvas-container">
+                    <canvas id="simulationCanvas" width="400" height="400"></canvas>
+                    <div class="canvas-overlay">
+                        <div class="progress-container" id="progressContainer">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progressFill"></div>
+                            </div>
+                            <span class="progress-text" id="progressText">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results">
+                <div class="results__grid">
+                    <div class="result-card">
+                        <h4 class="result-card__label">π Estimation</h4>
+                        <div class="result-card__value" id="piEstimate">-</div>
+                    </div>
+                    <div class="result-card">
+                        <h4 class="result-card__label">Points Processed</h4>
+                        <div class="result-card__value" id="pointsProcessed">0</div>
+                    </div>
+                    <div class="result-card">
+                        <h4 class="result-card__label">Points Inside Circle</h4>
+                        <div class="result-card__value" id="pointsInside">0</div>
+                    </div>
+                    <div class="result-card">
+                        <h4 class="result-card__label">Execution Time</h4>
+                        <div class="result-card__value" id="executionTime">0ms</div>
+                    </div>
+                    <div class="result-card">
+                        <h4 class="result-card__label">Error from π</h4>
+                        <div class="result-card__value" id="errorValue">-</div>
+                    </div>
+                    <div class="result-card">
+                        <h4 class="result-card__label">Accuracy</h4>
+                        <div class="result-card__value" id="accuracy">-</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="algorithm-info">
+                <h3 class="algorithm-info__title">Algorithm Details</h3>
+                <div class="algorithm-info__content">
+                    <div class="algorithm-desc">
+                        <h4>Sequential Approach</h4>
+                        <p>Generate N random (x,y) points in range [0,1]. Count points where x²+y²≤1. Estimate π using 4*(points inside circle)/(total points).</p>
+                    </div>
+                    <div class="algorithm-desc">
+                        <h4>Parallel Approach</h4>
+                        <p>Split work across multiple threads/workers. Each processes a batch of points independently. Aggregate results for final π estimation.</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
